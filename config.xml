@@ -9,29 +9,4 @@
 		destination_path="/etc"
 		file_name="server.log"
 	/>
-	<file
-		source_path="C:\Users\RR\Desktop"
-		destination_path="C:\Users\RR\Desktop\python\testing\copy_file_xml"
-		file_name="text.txt"
-	/>
-	<file
-		source_path="/mnt/c/Users/RR/Desktop"
-		destination_path="/mnt/c/Users/RR/Desktop/python/testing/copy_file_xml"
-		file_name="text.txt"
-	/>
-	<file
-		source_path="/mnt/c/Users/RR/Desktop"
-		destination_path="/mnt/c/Users/RR/Desktop/pythson/testing/copy_file_xml"
-		file_name="text.txt"
-	/>
-	<file
-		source_path="/mnt/c/Users/RR/Desktop"
-		destination_path="/mnt/c/Users/RR/Desktop/python/testing/copy_file_xml"
-		file_name="info.txt"
-	/>
-		<file
-		source_path="C:\Users\RR\Desktop"
-		destination_path="C:\Users\RR\Desktop\python\testing\copy_file_xml"
-		file_name="info.txt"
-	/>
 </config>
