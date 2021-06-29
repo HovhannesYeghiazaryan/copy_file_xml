@@ -1,13 +1,9 @@
-from xml.etree import ElementTree as ET
-import shutil
 import os
-import sys
+import shutil
+from xml.etree import ElementTree as ET
 
 
 def parse_xml(xml_file):
-    """
-    Parsing XML file
-    """
     try:
         xml_parse = ET.parse(xml_file)
         models = xml_parse.findall('file')
@@ -17,37 +13,35 @@ def parse_xml(xml_file):
         print('Can\'t find the file %s' % FileNotFoundError)
         print('Please check the file name')
     except Exception as ex:
-        print('Got another exception %s' % Exception)
+        print('Got another exception %s' % ex)
 
 
-def copy_for_linux(xml_data):
-    try:
-        for item in xml_data:
-            print(item)
-    except TypeError:
-        print('Wrong type for input data', TypeError)
+def copy_files(xml_data):
+    for item in xml_data:
+        if item['source_path'].__contains__(os.path.sep):
+            source = item['source_path']
+            destination = item['destination_path']
+            file_name = item['file_name']
+            try:
+                shutil.copy(f'{source}/' + file_name, destination)
+                shutil.copy(f'{source}\\' + file_name, destination)
+            except TypeError:
+                print('Wrong type for input data', TypeError)
+            except FileNotFoundError:
+                print(f'Can\'t find {file_name} file in {source} path')
+            except PermissionError:
+                print(f'Permission denied, can\'t copy {file_name} to {destination}')
+                pass
+            except Exception as ex:
+                print(f'Processed {ex} exception')
+            else:
+                print('Copying finished perfect')
 
 
 def main():
-    if sys.platform.lower() == 'linux' and os.path.sep == '/':
-        copy_for_linux(parse_xml('csonfig.xml'))
+    copy_files(parse_xml('config.xml'))
+    return 'Done!'
 
 
-#
-# for item in saved_models_data:
-#         try:
-#             source = item['source_path']
-#             target = item['destination_path']
-#             file_name = item['file_name']
-#             print(f'target\\'+file_name)
-#             # shutil.copy(source, f'target\\' + file_name)
-#             # os.chdir(target)
-#             # os.system('copy 1.txt 2.txt')
-#         except IOError as io_ex:
-#             print(f'Unable to copy file {io_ex}')
-#         except Exception:
-#             print("Unexpected error:", sys.exc_info())
-
-main()
-
-
+if __name__ == '__main__':
+    main()
